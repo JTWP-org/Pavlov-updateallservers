@@ -42,6 +42,9 @@ for i in "${serverS[@]}"; do
         case $type in
         PC|pc)
             install="/home/steam/Steam/steamcmd.sh +force_install_dir /home/steam/${i} +login anonymous +app_update 622970 +exit"
+            echo "update 29 running"
+            sudo rm /usr/lib/x86_64-linux-gnu/libc++.so
+            sudo ln -s /usr/lib/x86_64-linux-gnu/libc++.so.1 /usr/lib/x86_64-linux-gnu/libc++.so
             ;;
         BETA|beta)
             install="/home/steam/Steam/steamcmd.sh +force_install_dir /home/steam/${i} +login anonymous +app_update 622970 -beta beta_server +exit"
@@ -61,13 +64,9 @@ for i in "${serverS[@]}"; do
             ;;
         esac
         $install
-        cp /home/steam/Steam/steamapps/common/Steamworks\ SDK\ Redist/linux64/steamclient.so "~${i}/Pavlov/Binaries/Linux/steamclient.so"
+        cp /home/steam/Steam/steamapps/common/Steamworks\ SDK\ Redist/linux64/steamclient.so "${i}/Pavlov/Binaries/Linux/steamclient.so"
 
-        if [ "$update29" = "True" ]; then
-        echo "update 29 running"
-        sudo rm /usr/lib/x86_64-linux-gnu/libc++.so
-        sudo ln -s /usr/lib/x86_64-linux-gnu/libc++.so.1 /usr/lib/x86_64-linux-gnu/libc++.so
-        fi
+
         echo "END SERVER UPDATE FOR $name"
         echo
         echo
