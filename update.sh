@@ -1,5 +1,6 @@
 #!/bin/bash
 serverS=( $(ls -d  ~/*/Pavlov) )
+
 set -u
 clear 
 echo "WARNING script only works on servers installed in the home dir of the user running the script "
@@ -26,6 +27,7 @@ cp ~/Steam/steamapps/common/Steamworks\ SDK\ Redist/linux64/steamclient.so ~/.st
 echo "${#serverS[@]} Servers Detected "
 for i in "${serverS[@]}"; do
     if [ -f "${i}/Saved/Config/LinuxServer/Game.ini" ]; then
+        update29="True"
         name=$(cat "${i}/Saved/Config/LinuxServer/Game.ini" | grep ServerName | awk -F '=' '{print $2}')
         echo "------------------SERVER INFO"
         echo "$(echo $i | awk -F "/" '{print $4}')"
@@ -60,6 +62,12 @@ for i in "${serverS[@]}"; do
         esac
         $install
         cp /home/steam/Steam/steamapps/common/Steamworks\ SDK\ Redist/linux64/steamclient.so "~${i}/Pavlov/Binaries/Linux/steamclient.so"
+
+        if [ "$update29" = "True" ]; then
+        echo "update 29 running"
+        sudo rm /usr/lib/x86_64-linux-gnu/libc++.so
+        sudo ln -s /usr/lib/x86_64-linux-gnu/libc++.so.1 /usr/lib/x86_64-linux-gnu/libc++.so
+        fi
         echo "END SERVER UPDATE FOR $name"
         echo
         echo
