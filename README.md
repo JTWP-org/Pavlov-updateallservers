@@ -16,7 +16,8 @@ run script
 
 example of output 
 
-`WARNING script only works on servers installed in the home dir of the user running the script 
+```
+WARNING script only works on servers installed in the home dir of the user running the script 
 script will first update your Ubuntu install 
 
 ----------------------
@@ -172,4 +173,5 @@ Server Name: JTWP.org minecraft ZOMBIES
 
 Installing update now
 What type of server is this?
- PC,  BETA, SHACK,  RC,  SKIP,  if the PATH above isnt a server`
+ PC,  BETA, SHACK,  RC,  SKIP,  if the PATH above isnt a server
+```
